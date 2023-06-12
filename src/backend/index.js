@@ -26,18 +26,18 @@ app.post('/device/',function(req,res){
 
 });
 
-/* app.post('/recorridos/',function(req,res){
-    console.log("llego = "+req.body.id);
-    if(req.body.texto==undefined || req.body.texto==null || req.body.texto.length<4){
+app.post('/recorridos/',function(req,res){
+    console.log("llego = " + req.body.id + " cambia a " + req.body.value);
+    // update db con nuevo estado
+ /*     utils.query("update Devices set state = " + req.body.value + " where id = " + req.body.id, function(err, rsp, fields) {
+      if (err) {
         res.status(409);
-        res.send("el texto no es valido");
-    }else{
-        
-        res.send(JSON.stringify(devices)).status(200);
+        res.send("error");
+      } else {
+        res.status(200);
         res.send("Todo ok");
-    }
-
-}); */
+      } */
+    }); 
 
 
 app.get('/pepe/', function(req,res) {

@@ -53,7 +53,7 @@ class Main implements EventListenerObject,HttpResponse {
         for (var disp of lista) {
             var checkPrender = document.getElementById("ck_" + disp.id);
             checkPrender.addEventListener("input", this);
-   
+      
         }
         
     }
@@ -91,15 +91,17 @@ class Main implements EventListenerObject,HttpResponse {
             }
 
         } else if (elemento.id.startsWith("ck_")) {
-            //Ir al backend y aviasrle que el elemento cambio de estado
+            //Ir al backend y avisarle que el elemento cambio de estado
             //TODO armar un objeto json con la clave id y status y llamar al metodo ejecutarBackend
            
           //  alert("Cambiar el recorrido del dispositivo " + elemento.id);
-                var id = event.target.id.replace("ck_", "");
-                var newValue = (event.target as HTMLInputElement).value;
 
+          //Reemplazar elemento.id sacándole los primeros tres caracteres
+                var id = elemento.id.replace("ck_", "");
+                var newValue = elemento.value;
+                            
                 // Realizar la solicitud POST con el id y el nuevo valor
-                this.framework.ejecutarBackEnd("POST", "http://localhost:8000/recorridos", this, {id: id,value: newValue});
+                this.framework.ejecutarBackEnd("POST", "http://localhost:8000/recorridos", this, {id: id, value: newValue});
         }else {
             //TODO cambiar esto, recuperadon de un input de tipo text
             //el nombre  de usuario y el nombre de la persona
