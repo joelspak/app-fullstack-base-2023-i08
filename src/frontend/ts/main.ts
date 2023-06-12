@@ -33,19 +33,14 @@ class Main implements EventListenerObject,HttpResponse {
                           <p>
                           ${disp.description}
                           </p>
+            
+                          <button class="btn waves-effect waves-teal" id="edit_${disp.id}">Editar dispositivo</button>
+                         
                           <a href="#!" class="secondary-content">
-                          <div class="switch">
-                          <label>
-                            Off
-                            `;
-                            if (disp.state) {
-                                item +=`<input type="checkbox" checked id="ck_${disp.id}">`;
-                            } else {
-                                item +=`<input type="checkbox" id="ck_${disp.id}" >`;
-                            }
-                            item += `
-                            <span class="lever"></span>
-                            On
+                          <div class="switch"> <label>
+                          Recorrido del dispositivo:  
+                          <input type="number" id="ck_${disp.id}" min="0" max="1" step="0.01">
+            
                           </label>
                         </div>
                           </a>
@@ -98,7 +93,7 @@ class Main implements EventListenerObject,HttpResponse {
             //Ir al backend y aviasrle que el elemento cambio de estado
             //TODO armar un objeto json con la clave id y status y llamar al metodo ejecutarBackend
            
-            alert("El elemento " + elemento.id + " cambia de estado a =" + elemento.checked);
+            alert("Cambiar el recorrido del dispositivo " + elemento.id);
           
         }else {
             //TODO cambiar esto, recuperadon de un input de tipo text
