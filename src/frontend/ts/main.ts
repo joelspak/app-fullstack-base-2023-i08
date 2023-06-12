@@ -21,6 +21,7 @@ class Main implements EventListenerObject,HttpResponse {
 
         
         var ulDisp = document.getElementById("listaDisp");
+        ulDisp.innerHTML="";
         for (var disp of lista) {
             var item: string = `<li class="collection-item avatar">`;
                     if(disp.type==1){
@@ -34,7 +35,8 @@ class Main implements EventListenerObject,HttpResponse {
                           ${disp.description}
                           </p>
             
-                          <button class="btn waves-effect waves-teal" id="edit_${disp.id}">Editar dispositivo</button>
+                          <button class="btn waves-effect waves-teal" id="edit_${disp.id}">Editar</button>
+                          <button class="btn waves-effect waves-teal" id="delete_${disp.id}">Eliminar</button>
                          
                           <a href="#!" class="secondary-content">
                           <div class="switch"> <label>
@@ -53,7 +55,8 @@ class Main implements EventListenerObject,HttpResponse {
         for (var disp of lista) {
             var checkPrender = document.getElementById("ck_" + disp.id);
             checkPrender.addEventListener("input", this);
-      
+            var checkDelete = document.getElementById("delete_" + disp.id);
+            checkDelete.addEventListener("click", this);
         }
         
     }
@@ -102,7 +105,20 @@ class Main implements EventListenerObject,HttpResponse {
                             
                 // Realizar la solicitud POST con el id y el nuevo valor
                 this.framework.ejecutarBackEnd("POST", "http://localhost:8000/recorridos", this, {id: id, value: newValue});
-        }else {
+        } else if (elemento.id.startsWith("delete_")) {
+            //Ir al backend y avisarle que el elemento cambio de estado
+            //TODO armar un objeto json con la clave id y status y llamar al metodo ejecutarBackend
+           
+          //  alert("Cambiar el recorrido del dispositivo " + elemento.id);
+
+          //Reemplazar elemento.id sacándole los primeros tres caracteres
+                var id = elemento.id.replace("delete_", "");
+                                            
+                // Realizar la solicitud POST con el id
+                this.framework.ejecutarBackEnd("POST", "http://localhost:8000/delete", this, {id: id});
+                
+                this.obtenerDispositivo();
+        } else {
             //TODO cambiar esto, recuperadon de un input de tipo text
             //el nombre  de usuario y el nombre de la persona
             // validando que no sean vacios
