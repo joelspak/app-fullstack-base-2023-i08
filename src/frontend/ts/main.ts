@@ -39,7 +39,8 @@ class Main implements EventListenerObject,HttpResponse {
                           <a href="#!" class="secondary-content">
                           <div class="switch"> <label>
                           Recorrido del dispositivo:  
-                          <input type="number" id="ck_${disp.id}" min="0" max="1" step="0.01">
+                          <input type="number" id="ck_${disp.id}" min="0" max="1" step="0.1" value=${disp.state}>
+                     
             
                           </label>
                         </div>
@@ -51,10 +52,9 @@ class Main implements EventListenerObject,HttpResponse {
         
         for (var disp of lista) {
             var checkPrender = document.getElementById("ck_" + disp.id);
+            console.log(checkPrender.nodeValue);
             checkPrender.addEventListener("click", this);
-
-            
-
+   
         }
         
     }
@@ -71,6 +71,7 @@ class Main implements EventListenerObject,HttpResponse {
 
                 //TODO cambiar ESTO por mostrar estos datos separados por "-" 
                 //en un parrafo "etiqueta de tipo <p>"
+
               
             }
         } else if (event.target.id == "btnLogin") {
@@ -93,7 +94,9 @@ class Main implements EventListenerObject,HttpResponse {
             //Ir al backend y aviasrle que el elemento cambio de estado
             //TODO armar un objeto json con la clave id y status y llamar al metodo ejecutarBackend
            
-            alert("Cambiar el recorrido del dispositivo " + elemento.id);
+          //  alert("Cambiar el recorrido del dispositivo " + elemento.id);
+            console.log(event.target.id);
+         //   this.framework.ejecutarBackEnd("POST", "http://localhost:8000/recorridos", this, event.target.id);
           
         }else {
             //TODO cambiar esto, recuperadon de un input de tipo text
