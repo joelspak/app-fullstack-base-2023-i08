@@ -52,8 +52,7 @@ class Main implements EventListenerObject,HttpResponse {
         
         for (var disp of lista) {
             var checkPrender = document.getElementById("ck_" + disp.id);
-            console.log(checkPrender.nodeValue);
-            checkPrender.addEventListener("click", this);
+            checkPrender.addEventListener("input", this);
    
         }
         
@@ -64,7 +63,8 @@ class Main implements EventListenerObject,HttpResponse {
 
     handleEvent(event) {
         var elemento =<HTMLInputElement> event.target;
-        console.log(elemento)
+        console.log(elemento);
+        console.log(elemento.id, elemento.value)
         if (event.target.id == "btnListar") {
             this.obtenerDispositivo();
             for (var user of this.users) {
@@ -95,9 +95,11 @@ class Main implements EventListenerObject,HttpResponse {
             //TODO armar un objeto json con la clave id y status y llamar al metodo ejecutarBackend
            
           //  alert("Cambiar el recorrido del dispositivo " + elemento.id);
-            console.log(event.target.id);
-         //   this.framework.ejecutarBackEnd("POST", "http://localhost:8000/recorridos", this, event.target.id);
-          
+                var id = event.target.id.replace("ck_", "");
+                var newValue = (event.target as HTMLInputElement).value;
+
+                // Realizar la solicitud POST con el id y el nuevo valor
+                this.framework.ejecutarBackEnd("POST", "http://localhost:8000/recorridos", this, {id: id,value: newValue});
         }else {
             //TODO cambiar esto, recuperadon de un input de tipo text
             //el nombre  de usuario y el nombre de la persona
