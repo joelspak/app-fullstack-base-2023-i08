@@ -106,13 +106,25 @@ class Main implements EventListenerObject,HttpResponse {
                 // Realizar la solicitud POST con el id y el nuevo valor
                 this.framework.ejecutarBackEnd("POST", "http://localhost:8000/recorridos", this, {id: id, value: newValue});
         } else if (elemento.id.startsWith("delete_")) {
-            //Ir al backend y avisarle que el elemento cambio de estado
-            //TODO armar un objeto json con la clave id y status y llamar al metodo ejecutarBackend
+            //Ir al backend y avisarle que el elemento se debe eliminar
+            //armar un objeto json con la clave id y llamar al metodo ejecutarBackend
            
+          //Reemplazar elemento.id sacándole los primeros caracteres
+                var id = elemento.id.replace("delete_", "");
+                                            
+                // Realizar la solicitud POST con el id
+                this.framework.ejecutarBackEnd("POST", "http://localhost:8000/delete", this, {id: id});
+                
+                this.obtenerDispositivo();
+        } else if (elemento.id.startsWith("edit_")) {
+            //Ir al backend y avisarle que el elemento se editó
+            //armar un objeto json con la clave id, nuevo nombre y nueva descripción (obtenidos de los inputs)
+            //y llamar al metodo ejecutarBackend
+
           //  alert("Cambiar el recorrido del dispositivo " + elemento.id);
 
-          //Reemplazar elemento.id sacándole los primeros tres caracteres
-                var id = elemento.id.replace("delete_", "");
+          //Reemplazar elemento.id sacándole los primeros  caracteres
+                var id = elemento.id.replace("edit_", "");
                                             
                 // Realizar la solicitud POST con el id
                 this.framework.ejecutarBackEnd("POST", "http://localhost:8000/delete", this, {id: id});
