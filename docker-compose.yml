@@ -8,17 +8,22 @@ services:
             -                    ./src/frontend/ts:/workspace 
             -                    ./src/frontend/js:/output 
         command:                 "tsc --project /workspace --outDir /output --watch --pretty true"
+        depends_on:
+            -                    mysql-server
+
 
     mysql-server:
         image:                   mysql:5.7
         hostname:                mysql-server
         environment:
             MYSQL_ROOT_PASSWORD: userpass
+            MYSQL_ROOT_HOST: "%"
         volumes:
             -                    ./db/dumps:/docker-entrypoint-initdb.d
             -                    ./db/data:/var/lib/mysql
         networks:
             -                    app-fullstack-net
+
 
     mysql-admin:
         image:                   phpmyadmin/phpmyadmin
