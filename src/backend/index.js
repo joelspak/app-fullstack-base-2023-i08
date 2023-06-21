@@ -62,7 +62,7 @@ app.post('/delete/',function(req,res){
 app.post('/edit/',function(req,res){
     console.log("llego edit = " + req.body.id);
     // editar en db fila con id=req.body.id
-    utils.query("update Devices SET name='" + req.body.name + "', description='" + req.body.description + "' WHERE id=" + req.body.id, function(err, rsp, fields) {
+/*     utils.query("update Devices SET name='" + req.body.name + "', description='" + req.body.description + "' WHERE id=" + req.body.id, function(err, rsp, fields) {
               if (err) {            
                 res.status(409);
                 res.send("error");
@@ -71,10 +71,26 @@ app.post('/edit/',function(req,res){
                 res.send("Todo ok");
                 }
             }
+    ); */
+});
+
+
+////agregar es donde se postean las agregaciones de dispositivos, donde se agregan en la base de datos
+app.post('/agregar/',function(req,res){
+    console.log("llego agregar = " + req.body.id);
+    // agregar en db fila con id=req.body.id
+    utils.query("insert into Devices (name,description,state,type) values ('" + req.body.name + "','" + req.body.description + "',0," + req.body.type + ")", function(err, rsp, fields) {
+                if (err) {
+                res.status(409);
+                    
+                res.send("error");
+                } else {
+                res.status(200);
+                res.send("Todo ok");
+                }
+            }
     );
 });
-            
-
 
 
 

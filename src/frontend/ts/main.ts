@@ -57,6 +57,8 @@ class Main implements EventListenerObject,HttpResponse {
             checkPrender.addEventListener("input", this);
             var checkDelete = document.getElementById("delete_" + disp.id);
             checkDelete.addEventListener("click", this);
+            var checkEdit = document.getElementById("edit_" + disp.id);
+            checkEdit.addEventListener("click", this);
         }
         
     }
@@ -114,8 +116,22 @@ class Main implements EventListenerObject,HttpResponse {
                                             
                 // Realizar la solicitud POST con el id
                 this.framework.ejecutarBackEnd("POST", "http://localhost:8000/delete", this, {id: id});
-                
+                // vuelve a listar los dispositivos
                 this.obtenerDispositivo();
+                
+        } else if (event.target.id == "btnAgregar") {
+            //generar un pop up o un pedazo de html debajo del boton
+            //para que el usuario ingrese el nombre y la descripción del dispositivo
+            //y luego llamar al backend para que lo agregue
+            //armar un objeto json con la clave name, type y description y llamar al metodo ejecutarBackend
+            alert("Agregar un nuevo dispositivo");
+
+            // Realizar la solicitud POST con el id
+            this.framework.ejecutarBackEnd("POST", "http://localhost:8000/agregar", this, {name: "Nuevo dispositivo", type: 1, description: "Nueva descripción"});
+            // vuelve a listar los dispositivos
+            this.obtenerDispositivo();
+
+
         } else if (elemento.id.startsWith("edit_")) {
             //Ir al backend y avisarle que el elemento se editó
             //armar un objeto json con la clave id, nuevo nombre y nueva descripción (obtenidos de los inputs)
@@ -127,7 +143,7 @@ class Main implements EventListenerObject,HttpResponse {
                 var id = elemento.id.replace("edit_", "");
                                             
                 // Realizar la solicitud POST con el id
-                this.framework.ejecutarBackEnd("POST", "http://localhost:8000/delete", this, {id: id});
+                this.framework.ejecutarBackEnd("POST", "http://localhost:8000/edit", this, {id: id});
                 
                 this.obtenerDispositivo();
         } else {
