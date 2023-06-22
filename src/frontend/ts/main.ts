@@ -58,12 +58,59 @@ class Main implements EventListenerObject,HttpResponse {
             var checkDelete = document.getElementById("delete_" + disp.id);
             checkDelete.addEventListener("click", this);
             var checkEdit = document.getElementById("edit_" + disp.id);
-            checkEdit.addEventListener("click", this);
+            checkEdit.addEventListener("click", this.handleEdit(disp.id));
         }
         
     }
     obtenerDispositivo() {
         this.framework.ejecutarBackEnd("GET", "http://localhost:8000/devices",this);
+    }
+
+    handleEdit(id: number) {
+        return () => {
+          this.mostrarEdicion(id);
+        };
+      }
+
+    mostrarEdicion(id: number): void {
+        alert(id);
+        // Obtener referencias a los elementos del pop-up
+        const popupContainer = document.getElementById("popup");
+        const editForm = document.getElementById("edit-form") as HTMLFormElement;
+        const editNameInput = document.getElementById("edit-name") as HTMLInputElement;
+        const editDescriptionInput = document.getElementById("edit-description") as HTMLInputElement;
+        const cancelButton = document.getElementById("cancel-button");
+        
+        if (cancelButton) {
+          cancelButton.addEventListener("click", () => {
+            popupContainer.style.display = "none";
+            console.log("Cancelado");
+          });
+        }
+              
+        editNameInput.value = "";
+        editDescriptionInput.value = "";
+      
+        // Mostrar el pop-up
+        popupContainer.style.display = "flex";
+      
+        // Escuchar el evento de envío del formulario
+        editForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+      
+          // Obtener los valores ingresados por el usuario
+          const nuevoNombre = editNameInput.value;
+          const nuevaDescripcion = editDescriptionInput.value;
+      
+          // Actualizar los campos del dispositivo con los nuevos valores
+          this.framework.ejecutarBackEnd("POST", "http://localhost:8000/edit", this, {id: id, name: nuevoNombre, description: nuevaDescripcion});
+        
+            // oculto pop-up
+          popupContainer.style.display = "none";
+
+          // Volver a listar los dispositivos para refrescar la vista
+          this.obtenerDispositivo();
+        });
     }
 
     handleEvent(event) {
@@ -118,7 +165,7 @@ class Main implements EventListenerObject,HttpResponse {
                 this.framework.ejecutarBackEnd("POST", "http://localhost:8000/delete", this, {id: id});
                 // vuelve a listar los dispositivos
                 this.obtenerDispositivo();
-                
+
         } else if (event.target.id == "btnAgregar") {
             //generar un pop up o un pedazo de html debajo del boton
             //para que el usuario ingrese el nombre y la descripción del dispositivo
@@ -133,19 +180,8 @@ class Main implements EventListenerObject,HttpResponse {
 
 
         } else if (elemento.id.startsWith("edit_")) {
-            //Ir al backend y avisarle que el elemento se editó
-            //armar un objeto json con la clave id, nuevo nombre y nueva descripción (obtenidos de los inputs)
-            //y llamar al metodo ejecutarBackend
+            console.log("editando");
 
-          //  alert("Cambiar el recorrido del dispositivo " + elemento.id);
-
-          //Reemplazar elemento.id sacándole los primeros  caracteres
-                var id = elemento.id.replace("edit_", "");
-                                            
-                // Realizar la solicitud POST con el id
-                this.framework.ejecutarBackEnd("POST", "http://localhost:8000/edit", this, {id: id});
-                
-                this.obtenerDispositivo();
         } else {
             //TODO cambiar esto, recuperadon de un input de tipo text
             //el nombre  de usuario y el nombre de la persona
