@@ -65,12 +65,14 @@
                     </div>
                 </div>
                 <input type="button" class="btn" id="btnLogin" value="Login">
-<!--                 <input type="text" class="datepicker">
                 <p id="parrafo"></p>
+                <br/>
+<!--                 <input type="text" class="datepicker">
+                
                 
          
              
-                <br/>
+                
                 <div class="row">
                     <div class="input-field col s12 m12 l12 xl12">
                         <textarea id="textarea_1" class="materialize-textarea" style="height: 150px;" readonly></textarea>
@@ -96,6 +98,12 @@
                         
                         
                       </ul>
+
+                    <!--   <ul class="row" id="edicion">
+                        
+                        
+                      </ul> -->
+
                 </div>
                 <div class="row">
                     <div class="col s12 m8 l4 xl6">
@@ -106,6 +114,50 @@
                     </div>
                 </div>
             </div>	
+            <ul class="collection" id="form_agregar">
+                                               
+            </ul>
+
+             <div id="popup" class="popup-container">
+                <div class="popup-content">
+                    <h5>Editar Dispositivo</h5>
+                    <form id="edit-form">
+                        
+                        <label for="edit-name">Nombre</label>
+                        <i class="material-icons prefix">devices</i>
+                        <input type="text" id="edit-name" name="edit-name">
+
+                        <label for="edit-description">Descripción</label>
+                        <i class="material-icons prefix">description</i>
+                        <input  type="text" id="edit-description" name="edit-description">
+                        
+                        <button type="submit" class="btn waves-effect waves-light">Guardar</button>
+                        <button type="button" class="btn waves-effect waves-light" id="cancel-button">Cancelar</button>
+
+                    </form>
+                </div>
+            </div>
+
+
+<!--             <div id="popup" class="popup-container">
+                <div class="input-field col s12 xl6">
+                <h2>Editar Dispositivo</h2>
+                <form id="edit-form">
+                
+                    <i class="material-icons prefix " color="secondary">devices</i>
+                    <label for="edit-name">Nombre</label>
+                    <input type="text" id="edit-name" name="edit-name" placerholder="Televisor HD">
+
+                    <i class="material-icons prefix">description</i>
+                    <label for="edit-description">Descripción</label>
+                    <input id="edit-description" name="edit-description">
+                
+                    <button type="submit" class="btn waves-effect waves-light">Guardar</button>
+                </form>
+                </div>
+            </div> -->
+
+
         </main>
 		<!-- Page Footer -->
         <footer class="page-footer" style="background-color:#19a78f">
