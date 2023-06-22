@@ -13,3 +13,25 @@ main {
     font-weight: bold;
     font-size: large;
 }
+
+.popup-container {
+    display: none;
+    position: fixed;
+    top: 10%;
+    left: 10%;
+    right: 10%;
+    bottom: 10%;
+    background-color: rgba(246, 246, 247, 0.99); 
+    z-index: 9999;
+    overflow: auto; 
+    transition: opacity 3s ease, transform 3s ease;
+  }
+/*    
+  .popup-content .button-container {
+    text-align: right;
+    margin-top: 20px;
+  }
+  
+  .popup-content .button-container button {
+    margin-left: 10px;
+  } */
