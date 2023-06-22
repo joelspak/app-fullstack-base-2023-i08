@@ -64,6 +64,8 @@ class Main implements EventListenerObject,HttpResponse {
             var checkEdit = document.getElementById("edit_" + disp.id);
             checkEdit.addEventListener("click", this.handleEdit(disp.id));
         }
+        var checkAgregar = document.getElementById("btnAgregar");
+        checkAgregar.addEventListener("click", this);
         
     }
     obtenerDispositivo() {
@@ -87,7 +89,7 @@ class Main implements EventListenerObject,HttpResponse {
         
         if (cancelButton) {
           cancelButton.addEventListener("click", () => {
-            popupContainer.style.display = "none";
+            popupContainer.style.display = "none";  
             console.log("Cancelado");
           });
         }
@@ -97,8 +99,8 @@ class Main implements EventListenerObject,HttpResponse {
       
         // Mostrar el pop-up
         popupContainer.style.display = "flex";
-      
-        // Escuchar el evento de envío del formulario
+
+        // Escucho envío del formulario
         editForm.addEventListener("submit", (event) => {
         event.preventDefault();
       
