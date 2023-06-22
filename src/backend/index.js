@@ -60,18 +60,20 @@ app.post('/delete/',function(req,res){
 
 //// edit es donde se postean las ediciones de dispositivos, donde se editan en la base de datos
 app.post('/edit/',function(req,res){
-    console.log("llego edit = " + req.body.id);
+    console.log("llego edit = " + req.body.id + req.body.name + req.body.description);
     // editar en db fila con id=req.body.id
-/*     utils.query("update Devices SET name='" + req.body.name + "', description='" + req.body.description + "' WHERE id=" + req.body.id, function(err, rsp, fields) {
-              if (err) {            
-                res.status(409);
-                res.send("error");
-                } else {
-                res.status(200);
-                res.send("Todo ok");
-                }
+    console.log("update Devices SET name='" + req.body.name + "', description='" + req.body.description + "' WHERE id=" + req.body.id);
+    utils.query("update Devices SET name='" + req.body.name + "', description='" + req.body.description + "' WHERE id=" + req.body.id, function(err, rsp, fields) {
+              if (err) {
+              res.status(409);
+              res.send("error");
+              console.log("error");
+            } else {
+              res.status(200);
+              res.send("Todo ok");
+              console.log("Todo ok");
             }
-    ); */
+         });
 });
 
 
