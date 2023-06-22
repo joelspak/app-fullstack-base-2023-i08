@@ -51,6 +51,10 @@ class Main implements EventListenerObject,HttpResponse {
             
             ulDisp.innerHTML += item;
         }
+        item= `<div class="col s12 m4 l8 xl6 center-align">
+                    <button class="btn waves-effect waves-light button-view" id="btnAgregar">Agregar dispositivo</button>
+                 </div>`;
+        ulDisp.innerHTML += item;
         
         for (var disp of lista) {
             var checkPrender = document.getElementById("ck_" + disp.id);
