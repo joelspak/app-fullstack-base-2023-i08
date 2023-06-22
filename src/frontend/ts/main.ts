@@ -78,7 +78,7 @@ class Main implements EventListenerObject,HttpResponse {
         };
       }
 
-    mostrarEdicion(id: number): void {
+    mostrarEdicion(id: number) {
         alert(id);
         // Obtener referencias a los elementos del pop-up
         const popupContainer = document.getElementById("popup");
@@ -133,7 +133,6 @@ class Main implements EventListenerObject,HttpResponse {
               
             }
         } else if (event.target.id == "btnLogin") {
-
             var iUser = <HTMLInputElement>document.getElementById("iUser");
             var iPass = <HTMLInputElement>document.getElementById("iPass");
             var username: string = iUser.value;
@@ -143,10 +142,13 @@ class Main implements EventListenerObject,HttpResponse {
                 
                 //iriamos al servidor a consultar si el usuario y la cotraseña son correctas
                 var parrafo = document.getElementById("parrafo");
-                parrafo.innerHTML = "Espere...";
+                parrafo.innerHTML = "Logueado como " + username;
+                var btnListar = document.getElementById("btnListar");
+                btnListar.style.display="block";
             } else {
-                alert("el nombre de usuario es invalido");
-            }
+                alert("el nombre de usuario es invalido. Intente nuevamente.");
+            };
+
 
         } else if (elemento.id.startsWith("ck_")) {
             //Ir al backend y avisarle que el elemento cambio de estado
@@ -210,12 +212,6 @@ window.addEventListener("load", () => {
     var main: Main = new Main();
     var btnListar: HTMLElement = document.getElementById("btnListar");
     btnListar.addEventListener("click", main);
-
-
-
-
-    var btnAgregar: HTMLElement = document.getElementById("btnAgregar");
-    btnAgregar.addEventListener("click", main);
 
     var btnLogin = document.getElementById("btnLogin");
     btnLogin.addEventListener("click", main);
