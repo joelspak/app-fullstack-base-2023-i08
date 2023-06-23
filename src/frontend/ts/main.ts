@@ -62,7 +62,7 @@ class Main implements EventListenerObject,HttpResponse {
             var checkDelete = document.getElementById("delete_" + disp.id);
             checkDelete.addEventListener("click", this);
             var checkEdit = document.getElementById("edit_" + disp.id);
-            checkEdit.addEventListener("click", this);
+            checkEdit.addEventListener("click", this.handleEdit(disp.id, lista));
         }
         var checkAgregar = document.getElementById("btnAgregar");
         checkAgregar.addEventListener("click", this);
@@ -72,52 +72,70 @@ class Main implements EventListenerObject,HttpResponse {
         this.framework.ejecutarBackEnd("GET", "http://localhost:8000/devices",this);
     }
 
-    handleEdit(id: number) {
+    handleEdit(id: number, lista: Array<Device>) {
         return () => {
-          this.mostrarEdicion(id);
+          this.mostrarEdicion(id, lista);
         };
       }
 
-    mostrarEdicion(id: number) {
-        alert(id);
-        // Obtener referencias a los elementos del pop-up
+      mostrarEdicion(id: number, lista: Array<Device>) {
         const popupContainer = document.getElementById("popup");
         const editForm = document.getElementById("edit-form") as HTMLFormElement;
         const editNameInput = document.getElementById("edit-name") as HTMLInputElement;
         const editDescriptionInput = document.getElementById("edit-description") as HTMLInputElement;
         const cancelButton = document.getElementById("cancel-button");
-        
-        if (cancelButton) {
-          cancelButton.addEventListener("click", () => {
-            popupContainer.style.display = "none";  
-            console.log("Cancelado");
-          });
-        }
-              
-        editNameInput.value = "";
-        editDescriptionInput.value = "";
       
         // Mostrar el pop-up
         popupContainer.style.display = "flex";
-
-        // Escucho envío del formulario
-        editForm.addEventListener("submit", (event) => {
-        event.preventDefault();
       
-        // Obtener los valores ingresados por el usuario
-        const nuevoNombre = editNameInput.value;
-        const nuevaDescripcion = editDescriptionInput.value;
-    
-        // Actualizar los campos del dispositivo con los nuevos valores
-        this.framework.ejecutarBackEnd("POST", "http://localhost:8000/edit", this, {id: id, name: nuevoNombre, description: nuevaDescripcion});
-      
-          // oculto pop-up
-        popupContainer.style.display = "none";
+        // Obtener el dispositivo correspondiente al id
+        const dispositivo = this.buscarDispositivoPorId(id, lista);
 
-        // Volver a listar los dispositivos para refrescar la vista
-        this.obtenerDispositivo();
-        });
-    }
+        if (cancelButton) {
+          cancelButton.addEventListener("click", () => {
+          popupContainer.style.display = "none";
+          console.log("Cancelado");
+          const dispositivo=null;
+          });
+        }
+      
+        if (dispositivo) {
+          // Establecer los valores iniciales en los campos del formulario
+          editNameInput.value = dispositivo.name;
+          editDescriptionInput.value = dispositivo.description;
+      
+          // Escuchar el envío del formulario
+          editForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+      
+            // Obtener los nuevos valores ingresados por el usuario
+            const nuevoNombre = editNameInput.value;
+            const nuevaDescripcion = editDescriptionInput.value;
+      
+            // Actualizar los campos del dispositivo con los nuevos valores
+            dispositivo.name = nuevoNombre;
+            dispositivo.description = nuevaDescripcion;
+
+            // actualizar el dispositivo en el servidor
+            this.framework.ejecutarBackEnd("POST", "http://localhost:8000/edit/",this,{id:dispositivo.id,name:dispositivo.name,description:dispositivo.description});
+      
+            // Ocultar el pop-up
+            popupContainer.style.display = "none";
+      
+            // Volver a listar los dispositivos para refrescar la vista
+            this.obtenerDispositivo();
+            
+
+          });
+          
+        }
+      }
+      
+      buscarDispositivoPorId(id: number, lista: Array<Device>): Device | undefined {
+        // Buscar el dispositivo por su id
+        return lista.find((dispositivo) => dispositivo.id === id);
+      }
+      
 
     handleEvent(event) {
         var elemento =<HTMLInputElement> event.target;
@@ -192,8 +210,8 @@ class Main implements EventListenerObject,HttpResponse {
 
         } else if (elemento.id.startsWith("edit_")) {
             console.log("editando");
-            var id = elemento.id.replace("edit_", "");
-            this.handleEdit(parseInt(id))();
+      //      var id = elemento.id.replace("edit_", "");
+      //      this.handleEdit(parseInt(id))();
 
         } else {
             //TODO cambiar esto, recuperadon de un input de tipo text
