@@ -24,7 +24,7 @@ Trabajos de BackEnd:
 
 En esta imagen se puede ver la implementación del cliente web que controla los artefactos del hogar.
 
-![architecture](doc/webapp-example-1.png)
+![architecture](doc/webapp-finished.png)
 
 ## Comenzando 🚀
 
