@@ -173,40 +173,19 @@ Para cambiar el estado de un dispositivo, basta con correr el slicer de cada uno
 Se realizaron cambios sobre el código HTML y el código Typescript.
 Sobre el HTML, se realizó:
 - Inserción de íconos de Materialize
-- Cambio en el formulario de Log In para darle un formato distinto.
-- 
+- Cambio en el formulario de Log In para darle un formato distinto. Este formulario está disponible ni bien se carga la página y luego desaparece tras loguearse, dándole lugar al resto de las aplicaciones.
+- Inserción de eventos de Agregar, Editar y Eliminar dispositivos (estos dos últimos están presentes para cada dispositivo). Agregar y Eliminar un dispositivo impacta directamente en la comunicación con el Backend -para eliminar, se envía el id al backend, y para agregar, se envía nombre y descripción), pero a la hora de Editar, primero se abre un formulario que consulta el nuevo nombre y descripción del dispositivo. Este pop-up ha sido de los mayores desafíos de este trabajo. Este formulario tiene los botones de Guardar (para seguir adelante con el cambio) o Cancelar (lo que cierra el formulario y deja todo como estaba).
+- Para cada dispositivo también se cambió el switch on/off de cada dispositivo para incorporar un slicer con la posibilidad de barrer un continuo de funcionamiento (0 implica apagado, 1 implica prendido al 100%).
+- Se cambiaron los `href` de los links de Ayuda y Contacto de la página web hacia los del diseñador de estos cambios.
 
 ### Backend
+Se han incorporado los POST de las siguientes rutas: /delete, /agregar, /edit, /recorridos y alterado el GET /devices.
 
-Completá todos los detalles de funcionamiento sobre el backend, sus interacciones con el cliente web, la base de datos, etc.
-
-<details><summary><b>Ver los endpoints disponibles</b></summary><br>
-
-Completá todos los endpoints del backend con los metodos disponibles, los headers y body que recibe, lo que devuelve, ejemplos, etc.
-
-1) Devolver el estado de los dispositivos.
-
-```json
-{
-    "method": "get",
-    "request_headers": "application/json",
-    "request_body": "",
-    "response_code": 200,
-    "request_body": {
-        "devices": [
-            {
-                "id": 1,
-                "status": true,
-                "description": "Kitchen light"
-            }
-        ]
-    },
-}
-``` 
-
-</details>
-
-</details>
+- GET /devices: en vez de estar hardcodeado como estaba originalmente, ejecuta una query a la base de datos para traer todos los dispositivos de `Devices`, y devuelve un JSON con esta información.
+- POST /delete: del FrontEnd se recibe el id del dispositivo a borrar, que se borra de la base de datos con "delete". Se devuelven los status 409 o 200 según haya habido un error o no.
+- POST /agregar: del FrontEnd se recibe nombre y descripción, el id se genera automaticamente en el insert. Se devuelven los status 409 o 200 según haya habido un error o no.
+- POST /edit: del FrontEnd se recibe el id del dispositivo, nuevo nombre y descripción. Con un update a la base de datos se actualizan estos valores.
+- POST /recorridos: similar a /edit, se updatea la base de datos pero solo el campo `state`. Recibe también el id del FrontEnd.
 
 ### Mejoras Futuras
 - Implementar el Registro, que podría hacerse como otro formulario que permita insertar al usuario y su contraseña en una tabla `Users` de la base de datos. Luego, al proporcionar usuario y contraseña para el Log In, puede consultarse la base de datos para ver, en primera instancia, si existe el usuario, y luego, si su contraseña matchea con la proporcionada. En ese caso, se permite el Log In.
