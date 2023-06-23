@@ -62,7 +62,7 @@ class Main implements EventListenerObject,HttpResponse {
             var checkDelete = document.getElementById("delete_" + disp.id);
             checkDelete.addEventListener("click", this);
             var checkEdit = document.getElementById("edit_" + disp.id);
-            checkEdit.addEventListener("click", this.handleEdit(disp.id));
+            checkEdit.addEventListener("click", this);
         }
         var checkAgregar = document.getElementById("btnAgregar");
         checkAgregar.addEventListener("click", this);
@@ -104,18 +104,18 @@ class Main implements EventListenerObject,HttpResponse {
         editForm.addEventListener("submit", (event) => {
         event.preventDefault();
       
-          // Obtener los valores ingresados por el usuario
-          const nuevoNombre = editNameInput.value;
-          const nuevaDescripcion = editDescriptionInput.value;
+        // Obtener los valores ingresados por el usuario
+        const nuevoNombre = editNameInput.value;
+        const nuevaDescripcion = editDescriptionInput.value;
+    
+        // Actualizar los campos del dispositivo con los nuevos valores
+        this.framework.ejecutarBackEnd("POST", "http://localhost:8000/edit", this, {id: id, name: nuevoNombre, description: nuevaDescripcion});
       
-          // Actualizar los campos del dispositivo con los nuevos valores
-          this.framework.ejecutarBackEnd("POST", "http://localhost:8000/edit", this, {id: id, name: nuevoNombre, description: nuevaDescripcion});
-        
-            // oculto pop-up
-          popupContainer.style.display = "none";
+          // oculto pop-up
+        popupContainer.style.display = "none";
 
-          // Volver a listar los dispositivos para refrescar la vista
-          this.obtenerDispositivo();
+        // Volver a listar los dispositivos para refrescar la vista
+        this.obtenerDispositivo();
         });
     }
 
@@ -145,9 +145,12 @@ class Main implements EventListenerObject,HttpResponse {
                 parrafo.innerHTML = "Logueado como " + username;
                 var btnListar = document.getElementById("btnListar");
                 btnListar.style.display="block";
+                var loginForm = document.getElementById("loginForm");
+                loginForm.style.display="none";
             } else {
                 alert("el nombre de usuario es invalido. Intente nuevamente.");
             };
+            
 
 
         } else if (elemento.id.startsWith("ck_")) {
@@ -189,6 +192,8 @@ class Main implements EventListenerObject,HttpResponse {
 
         } else if (elemento.id.startsWith("edit_")) {
             console.log("editando");
+            var id = elemento.id.replace("edit_", "");
+            this.handleEdit(parseInt(id))();
 
         } else {
             //TODO cambiar esto, recuperadon de un input de tipo text
