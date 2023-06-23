@@ -44,7 +44,7 @@ Continua con la descarga del código cuando tengas las dependencias instaladas y
 
 ### Descargar el código
 
-Para descargar el código, lo más conveniente es que realices un `fork` de este proyecto a tu cuenta personal haciendo click en [este link](https://github.com/gotoiot/app-fullstack-base/fork). Una vez que ya tengas el fork a tu cuenta, descargalo con este comando (acordate de poner tu usuario en el link):
+Para descargar el código, lo más conveniente es que realices un `fork` de este proyecto a tu cuenta personal haciendo click en [este link](https://github.com/joelspak/app-fullstack-base-2023-i08/fork). Una vez que ya tengas el fork a tu cuenta, descargalo con este comando (acordate de poner tu usuario en el link):
 
 ```
 git clone https://github.com/USER/app-fullstack-base.git
@@ -66,12 +66,6 @@ Si pudiste acceder al cliente web y al administrador significa que la aplicació
 
 Continuá explorando el proyecto una vez que lo tengas funcionando.
 
-## Configuraciones de funcionamiento 🔩
-
-Al crearse la aplicación se ejecutan los contenedores de Docker de cada servicio, se crea la base de datos y sus tablas. A continuación podés encontrar info si querés cambiar la estructura de la DB o bien sus configuraciones de acceso.
-
-<details><summary><b>Lee cómo configurar la aplicación</b></summary><br>
-
 ### Configuración de la DB
 
 Como ya comprobaste, para acceder PHPMyAdmin tenés que ingresar en la URL [localhost:8001/](http://localhost:8001/). En el login del administrador, el usuario para acceder a la db es `root` y contraseña es la variable `MYSQL_ROOT_PASSWORD` del archivo `docker-compose.yml`.
@@ -82,14 +76,7 @@ Si quisieras cambiar la contraseña, puertos, hostname u otras configuraciones d
 
 ### Estructura de la DB
 
-Al iniciar el servicio de la base de datos, si esta no está creada toma el archivo que se encuentra en `db/dumps/smart_home.sql` para crear la base de datos automáticamente.
-
-En ese archivo está la configuración de la tabla `Devices` y otras configuraciones más. Si quisieras cambiar algunas configuraciones deberías modificar este archivo y crear nuevamente la base de datos para que se tomen en cuenta los cambios.
-
-Tené en cuenta que la base de datos se crea con permisos de superusuario por lo que no podrías borrar el directorio con tu usuario de sistema, para eso debés hacerlo con permisos de administrador. En ese caso podés ejecutar el comando `sudo rm -r db/data` para borrar el directorio completo.
-
-</details>
-
+Al iniciar el servicio de la base de datos, si esta no está creada toma el archivo que se encuentra en `db/dumps/smart_home.sql` para crear la base de datos automáticamente. En ese archivo está la configuración de la tabla `Devices` y otras configuraciones más. 
 
 ## Detalles principales 🔍
 
@@ -155,7 +142,7 @@ En la siguiente ilustración podés ver cómo está organizado el proyecto para 
 ├── LICENSE.md                  # licencia del proyecto
 ```
 
-> No olvides ir poniendo tus cambios en el archivo `CHANGELOG.md` a medida que avanzas en el proyecto.
+
 
 </details>
 
@@ -165,13 +152,29 @@ En esta sección podés ver los detalles específicos de funcionamiento del cód
 
 <details><summary><b>Mira los detalles de implementación</b></summary><br>
 
-### Agregar un dispositivo
+### Loguearse en la página web
+En primer lugar, se debe loguear en la página web con un usuario y contraseña que posean más de tres caracteres. Detalles sobre mejoras futuras acerca del registro pueden encontrarse en Mejoras Futuras. Tras validar la condición de tres caracteres, se permite el Log In.
 
-Completá los pasos para agregar un dispositivo desde el cliente web.
+Permitir el Log In implica que el nombre del usuario aparezca en la parte superior derecha de la web junto con un ícono de account. Se oculta el cuadro de Log In y se muestra el cuadro de `Listar`, que permite listar los dispositivos existentes en la tabla `Devices` de la base de datos.
+
+### Agregar un dispositivo
+Tras listar los dispositivos, se puede clickear en "Agregar" para insertar uno nuevo. Aparece con nombre y descripción genérica, luego puede editarse.
+
+### Editar un dispositivo
+Para cada dispositivo, puede clickearse en su botón "Editar" para cambiar su nombre y descripción.
+
+### Eliminar un dispositivo
+Para eliminar un dispositivo, puede clickearse en su botón "Eliminar" para borrarlo de la base de datos.
+
+### Editar el rango de un dispositivo
+Para cambiar el estado de un dispositivo, basta con correr el slicer de cada uno de ellos. Automáticamente se reflejará en la base de datos.
 
 ### Frontend
-
-Completá todos los detalles sobre cómo armaste el frontend, sus interacciones, etc.
+Se realizaron cambios sobre el código HTML y el código Typescript.
+Sobre el HTML, se realizó:
+- Inserción de íconos de Materialize
+- Cambio en el formulario de Log In para darle un formato distinto.
+- 
 
 ### Backend
 
@@ -204,6 +207,15 @@ Completá todos los endpoints del backend con los metodos disponibles, los heade
 </details>
 
 </details>
+
+### Mejoras Futuras
+- Implementar el Registro, que podría hacerse como otro formulario que permita insertar al usuario y su contraseña en una tabla `Users` de la base de datos. Luego, al proporcionar usuario y contraseña para el Log In, puede consultarse la base de datos para ver, en primera instancia, si existe el usuario, y luego, si su contraseña matchea con la proporcionada. En ese caso, se permite el Log In.
+
+- Cambiar ligeramente la tabla `Devices` para agregar el `user_id`, un id que permita matchear dispositivos con su usuario correspondiente.
+
+- Mejoras en el backend de Edición de dispositivos.
+
+- Mejoras en el FrontEnd y diseño de la aplicación web.
 
 
 ## Tecnologías utilizadas 🛠️
