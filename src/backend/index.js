@@ -67,11 +67,9 @@ app.post('/edit/',function(req,res){
               if (err) {
               res.status(409);
               res.send("error");
-              console.log("error");
             } else {
               res.status(200);
               res.send("Todo ok");
-              console.log("Todo ok");
             }
          });
 });
@@ -93,10 +91,6 @@ app.post('/agregar/',function(req,res){
             }
     );
 });
-
-
-
-
 
 
 /* app.get('/pepe/', function(req,res) {

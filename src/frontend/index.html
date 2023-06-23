@@ -29,10 +29,7 @@
             <!-- Page Body -->
             <div class="container">
                 <br />
-
-            
-
-                <div class="row">
+                <div class="row" id="loginForm">
                     <div class="col s12 m6 offset-m3">
                       <div class="card">
                         <div class="card-content">
@@ -48,94 +45,42 @@
                             <label for="password">Password</label>
                           </div>
                           <div class="card-action">
-                            <input type="button" class="btn" id="btnLogin" value="Log In">
+                            <input type="button" class="btn" id="btnLogin" value="Iniciar Sesión">
                           </div>
                         </div>
                       </div>
                     </div>
                 </div>
-                  
-                  
-<!--                  <div class="row">
-                    <div class="input-field col s12 xl6">
-                        <i class="material-icons prefix " color="secondary">accessibility</i>
-                        <label>Usuario</label>
-                        <input type="text" placeholder="jperez" id="iUser">
-                    </div>
-                    <div class="input-field col s12 xl6">
-                        <i class="material-icons prefix">lock</i>
-                        <label for="iPass">Contraseña</label>
-                        <input type="password" id="iPass">
-                    </div>
-                </div>
-                <input type="button" class="btn" id="btnLogin" value="Login">
-                <p id="parrafo"></p> -->
                 <br/>
-
-
-
-<!--                 <input type="text" class="datepicker">
-                
-                
-         
-             
-                
-                <div class="row">
-                    <div class="input-field col s12 m12 l12 xl12">
-                        <textarea id="textarea_1" class="materialize-textarea" style="height: 150px;" readonly></textarea>
-                    </div>
-                    <p class="range-field">
-                        <input type="range" id="test5" min="0" max="100" />
-                      </p>
-                    <div class="input-field col s12">
-                        <select multiple id="c">
-                          <option value="" disabled selected>Choose your option</option>
-                          <option value="1">Option 1</option>
-                          <option value="2">Option 2</option>
-                          <option value="3">Option 3</option>
-                        </select>
-                        <label>Materialize Multiple Select</label>
-                      </div>
-                </div>
-                <div > -->
-                      <!-- Switch -->
-<br></br>
+                <br></br>
                 <div class="col s12 m8 l4 xl6 center-align">
-                  <!--  <button class="btn waves-effect waves-light button-view" id="btnListar">Listar</button> -->
-                    <button class="btn waves-effect waves-light button-view" id="btnListar" style="display: none;">Listar</button>
+                    <button class="btn waves-effect waves-light button-view" id="btnListar" style="display: none;">
+                      Listar
+                      <i class="material-icons right">arrow_drop_down</i>
+                    </button>
                 </div>
+                <br></br>
+                <ul class="collection" id="listaDisp">
+                </ul>
 
-<br></br>
-                    <ul class="collection" id="listaDisp">
-                        
-                        
-                      </ul>
-
-                </div>
-            </div>	
-
-             <div id="popup" class="popup-container">
-                <div class="popup-content">
+                <div id="popup" class="popup-container">
+                  <div class="popup-content">
                     <h5>Editar Dispositivo</h5>
-                    <form id="edit-form">
-                        
-                        <label for="edit-name">Nombre</label>
-                        <i class="material-icons prefix">devices</i>
-                        <input type="text" id="edit-name" name="edit-name">
-
-                        <label for="edit-description">Descripción</label>
-                        <i class="material-icons prefix">description</i>
-                        <input  type="text" id="edit-description" name="edit-description">
-
-                        <button type="submit" class="btn waves-effect waves-light">Guardar</button>
-                        <button type="button" class="btn waves-effect waves-light" id="cancel-button">Cancelar</button>
-
-                    </form>
+                    <div id="edit-form">
+                      <label for="edit-name">Nombre</label>
+                      <i class="material-icons prefix">devices</i>
+                      <input type="text" id="edit-name" name="edit-name">
+                
+                      <label for="edit-description">Descripción</label>
+                      <i class="material-icons prefix">description</i>
+                      <input type="text" id="edit-description" name="edit-description">
+                
+                      <button type="button" class="btn waves-effect waves-light" id="save-button">Guardar</button>
+                      <button type="button" class="btn waves-effect waves-light" id="cancel-button">Cancelar</button>
+                    </div>
+                  </div>
                 </div>
-            </div>
-
-
-
+                
         </main>
 		<!-- Page Footer -->
         <footer class="page-footer" style="background-color:#19a78f">
@@ -148,9 +93,12 @@
                     <div class="col l6 s6">
                         <h5 class="white-text right-align">Contact</h5>
                         <p class="white-text right-align">
-                            <a class="grey-text text-lighten-3" href="mailto:joelspak45@gmail.com">Email | </a>
-                            <!--<a class="grey-text text-lighten-3" href="!#">Twitter | </a>-->
-                            <a class="grey-text text-lighten-3" href="https://www.linkedin.com/in/joel-spak-0a71b7168/" target="_blank">LinkedIn</a>
+                            <a class="grey-text text-lighten-3" href="mailto:joelspak45@gmail.com">
+                              Email | 
+                            </a>
+                            <a class="grey-text text-lighten-3" href="https://www.linkedin.com/in/joel-spak-0a71b7168/" target="_blank">
+                              LinkedIn
+                            </a>
                         </p>
                     </div>
                 </div>

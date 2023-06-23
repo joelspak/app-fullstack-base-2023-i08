@@ -21,12 +21,13 @@ main {
     left: 10%;
     right: 10%;
     bottom: 10%;
-    background-color: rgba(246, 246, 247, 0.99); 
-    border: 2px solid #333; 
-    border-radius: 8px;
+    background-color: rgba(246, 246, 247, 0.979); 
+    border: 1px solid #333; 
+    border-radius: 5px;
     z-index: 9999;
     overflow: auto; 
-    transition: opacity 3s ease, transform 3s ease;
+    transform: scale(0.9);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
   }
 
 
@@ -36,5 +37,5 @@ main {
 }
 
 .popup-container h5 {
-  color: #283593;
+  color: #181f57;
   }

@@ -36,7 +36,7 @@ CREATE TABLE `Devices` (
   `id` int(11) NOT NULL,
   `name` varchar(64) NOT NULL,
   `description` varchar(128) NOT NULL,
-  `state` int(11) NOT NULL,
+  `state` float(11) NOT NULL,
   `type` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -45,7 +45,7 @@ CREATE TABLE `Devices` (
 --
 
 INSERT INTO `Devices` (`id`, `name`, `description`, `state`, `type`) VALUES
-(1, 'Lampara 1', 'Luz living', 1, 0),
+(1, 'Lampara 1', 'Luz living', 0.5, 0),
 (2, 'Lampara 2', 'Luz cocina', 0, 0),
 (3, 'Velador', 'Velador living', 1, 0),
 (4, 'Persiana 1', 'Persiana living', 1, 1),
